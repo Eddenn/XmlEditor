@@ -1,2 +1,1 @@
-Projet XML - Matser 1 Informatique
-Client CV Editor
+Projet XML - Matser 1 Informatique - Client CV Editor
