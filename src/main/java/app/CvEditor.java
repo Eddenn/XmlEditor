@@ -6,8 +6,14 @@ import app.util.CvUtils;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.ws.http.HTTPException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class CvEditor {
@@ -16,6 +22,8 @@ public class CvEditor {
     private JMenuBar menuBar;
     private JMenu preferenceMenu;
     private JMenuItem configMenuItem;
+    private JMenu fileMenu;
+    private JMenuItem openMenuItem;
 
     private JTabbedPane tabPanel;
     private CvFormPanel formAddPanel;
@@ -55,11 +63,15 @@ public class CvEditor {
         configMenuItem = new JMenuItem("Configuration");
         preferenceMenu.add(configMenuItem);
         menuBar.add(preferenceMenu);
+        fileMenu = new JMenu("Fichier");
+        openMenuItem = new JMenuItem("Envoyer un CV");
+        fileMenu.add(openMenuItem);
+        menuBar.add(fileMenu);
         mainFrame.setJMenuBar(menuBar);
 
         tabPanel = new JTabbedPane();
-        formAddPanel = new CvFormPanel();
-        formModifyPanel = new CvFormPanel();
+        formAddPanel = new CvFormPanel(ActionType.ADD);
+        formModifyPanel = new CvFormPanel(ActionType.MODIFY);
         viewPanel = new CvViewerPanel(ActionType.DETAIL);
         deletePanel = new CvViewerPanel(ActionType.DELETE);
         homePanel = new CvBasicViewerPanel(ActionType.HOME);
@@ -83,22 +95,34 @@ public class CvEditor {
 
         configMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String host_url = JOptionPane.showInputDialog(mainFrame,"Configuration de l'hôte :","Configuration du service",JOptionPane.PLAIN_MESSAGE);
-                String port = JOptionPane.showInputDialog(mainFrame,"Configuration du port :","Configuration du service",JOptionPane.PLAIN_MESSAGE);
                 String service_path = JOptionPane.showInputDialog(mainFrame,"Configuration de le chemin du service :","Configuration du service",JOptionPane.PLAIN_MESSAGE);
 
-                if(port != null && host_url != null && service_path != null) {
+                if(service_path != null) {
                     try {
-                        int iPort = Integer.parseInt(port);
-                        try {
-                            CvUtils.setHostUrl(host_url);
-                        } catch (MalformedURLException e2) {
-                            JOptionPane.showMessageDialog(mainFrame,"L'hôte est mal formé.","Erreur lors de l'entrée de l'hôte",JOptionPane.ERROR_MESSAGE);
-                        }
-                        CvUtils.setPort(iPort);
                         CvUtils.setServicePath(service_path);
-                    } catch (NumberFormatException e1) {
-                        JOptionPane.showMessageDialog(mainFrame,"Le port doit être un entier.","Erreur lors de l'entrée du port",JOptionPane.ERROR_MESSAGE);
+                    } catch (MalformedURLException e2) {
+                        JOptionPane.showMessageDialog(mainFrame,"Le chemin d'accès au service est mal formé.","Erreur lors de l'entrée du chemin d'accès au service",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
+        openMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("XML file", "xml");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    FileReader file = null;
+                    try {
+                        file = new FileReader(chooser.getSelectedFile().getAbsolutePath());
+                        CvUtils.doAction(ActionType.ADD,file);
+                    } catch (IOException e1) {
+                        JOptionPane.showMessageDialog(mainFrame,"Le fichier fourni n'a pas pu être lu.","Erreur lors de la lecture du fichier",JOptionPane.ERROR_MESSAGE);
+                    } catch (HTTPException e1) {
+                        JOptionPane.showMessageDialog(null,"Code de retour : "+e1.getStatusCode(),"Erreur lors de la requête",JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
