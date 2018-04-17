@@ -13,16 +13,17 @@ public class CvViewerPanel extends JPanel {
 
     private JTextField textField;
     private JButton button;
-    private JLabel view;
+    private JEditorPane view;
     private final ActionType type;
 
     public CvViewerPanel(final ActionType type) {
         this.type = type;
         setLayout(new BorderLayout());
 
-        view = new JLabel();
-        view.setVerticalAlignment(JLabel.TOP);
-        view.setHorizontalAlignment(JLabel.LEFT);
+        view = new JEditorPane();
+        view.setEditable(false);
+        if(type == ActionType.RESUME) view.setContentType("application/xml");
+        else view.setContentType("text/html");
         textField = new JTextField();
         button = new JButton("Envoyer");
         button.addActionListener(new ActionListener() {
@@ -36,6 +37,7 @@ public class CvViewerPanel extends JPanel {
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(null,"Connection au service impossible","Erreur lors de la connection au service",JOptionPane.ERROR_MESSAGE);
                 }
+                view.getEditorKit().createDefaultDocument();
                 view.setText("<html>"+cv+"</html>");
             }
         });
@@ -46,7 +48,7 @@ public class CvViewerPanel extends JPanel {
         }
         add(p, BorderLayout.NORTH);
 
-        add(view, BorderLayout.CENTER);
+        add(new JScrollPane(view), BorderLayout.CENTER);
     }
 
 }
