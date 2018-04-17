@@ -59,14 +59,17 @@ public class CvEditor {
         mainFrame.setSize(800,600);
 
         menuBar = new JMenuBar();
-        preferenceMenu = new JMenu("Préférences");
-        configMenuItem = new JMenuItem("Configuration");
-        preferenceMenu.add(configMenuItem);
-        menuBar.add(preferenceMenu);
+
         fileMenu = new JMenu("Fichier");
         openMenuItem = new JMenuItem("Envoyer un CV");
         fileMenu.add(openMenuItem);
         menuBar.add(fileMenu);
+
+        preferenceMenu = new JMenu("Préférences");
+        configMenuItem = new JMenuItem("Configuration");
+        preferenceMenu.add(configMenuItem);
+        menuBar.add(preferenceMenu);
+
         mainFrame.setJMenuBar(menuBar);
 
         tabPanel = new JTabbedPane();

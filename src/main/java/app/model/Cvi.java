@@ -2,12 +2,14 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2018.04.12 à 02:48:54 PM CEST 
+// Généré le : 2018.04.17 à 10:55:12 AM CEST 
 //
 
 
 package app.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -57,7 +59,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="expe">
+ *                   &lt;element name="expe" maxOccurs="unbounded" minOccurs="0">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -80,7 +82,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="diplome">
+ *                   &lt;element name="diplome" maxOccurs="5">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -89,12 +91,12 @@ import javax.xml.bind.annotation.XmlType;
  *                             &lt;element name="descript" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                             &lt;element name="institut" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                           &lt;/sequence>
- *                           &lt;attribute name="niveau" type="{http://univ.fr/cvi}niveauDiplome" />
+ *                           &lt;attribute name="niveau" use="required" type="{http://univ.fr/cvi}niveauDiplome" />
  *                         &lt;/restriction>
  *                       &lt;/complexContent>
  *                     &lt;/complexType>
  *                   &lt;/element>
- *                   &lt;element name="certif" minOccurs="0">
+ *                   &lt;element name="certif" maxOccurs="unbounded" minOccurs="0">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -107,12 +109,12 @@ import javax.xml.bind.annotation.XmlType;
  *                       &lt;/complexContent>
  *                     &lt;/complexType>
  *                   &lt;/element>
- *                   &lt;element name="lv">
+ *                   &lt;element name="lv" maxOccurs="5">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;attribute name="iso" type="{http://univ.fr/cvi}langues" />
- *                           &lt;attribute name="cert" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *                           &lt;attribute name="iso" use="required" type="{http://univ.fr/cvi}langues" />
+ *                           &lt;attribute name="cert" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *                           &lt;attribute name="nivs" type="{http://univ.fr/cvi}niveauCertif" />
  *                           &lt;attribute name="nivi" type="{http://univ.fr/cvi}valeurToeic" />
  *                         &lt;/restriction>
@@ -124,7 +126,7 @@ import javax.xml.bind.annotation.XmlType;
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           &lt;sequence>
- *                             &lt;element name="langage">
+ *                             &lt;element name="langage" maxOccurs="unbounded">
  *                               &lt;complexType>
  *                                 &lt;complexContent>
  *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -146,7 +148,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="divers" minOccurs="0">
+ *         &lt;element name="divers" maxOccurs="5" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -183,7 +185,7 @@ public class Cvi {
     protected Cvi.Prof prof;
     @XmlElement(required = true)
     protected Cvi.Competences competences;
-    protected Cvi.Divers divers;
+    protected List<Cvi.Divers> divers;
 
     /**
      * Obtient la valeur de la propriété identite.
@@ -282,27 +284,32 @@ public class Cvi {
     }
 
     /**
-     * Obtient la valeur de la propriété divers.
+     * Gets the value of the divers property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Cvi.Divers }
-     *     
-     */
-    public Cvi.Divers getDivers() {
-        return divers;
-    }
-
-    /**
-     * Définit la valeur de la propriété divers.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the divers property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Cvi.Divers }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDivers().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Cvi.Divers }
+     * 
+     * 
      */
-    public void setDivers(Cvi.Divers value) {
-        this.divers = value;
+    public List<Cvi.Divers> getDivers() {
+        if (divers == null) {
+            divers = new ArrayList<Cvi.Divers>();
+        }
+        return this.divers;
     }
 
 
@@ -316,7 +323,7 @@ public class Cvi {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="diplome">
+     *         &lt;element name="diplome" maxOccurs="5">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -325,12 +332,12 @@ public class Cvi {
      *                   &lt;element name="descript" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *                   &lt;element name="institut" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *                 &lt;/sequence>
-     *                 &lt;attribute name="niveau" type="{http://univ.fr/cvi}niveauDiplome" />
+     *                 &lt;attribute name="niveau" use="required" type="{http://univ.fr/cvi}niveauDiplome" />
      *               &lt;/restriction>
      *             &lt;/complexContent>
      *           &lt;/complexType>
      *         &lt;/element>
-     *         &lt;element name="certif" minOccurs="0">
+     *         &lt;element name="certif" maxOccurs="unbounded" minOccurs="0">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -343,12 +350,12 @@ public class Cvi {
      *             &lt;/complexContent>
      *           &lt;/complexType>
      *         &lt;/element>
-     *         &lt;element name="lv">
+     *         &lt;element name="lv" maxOccurs="5">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                 &lt;attribute name="iso" type="{http://univ.fr/cvi}langues" />
-     *                 &lt;attribute name="cert" type="{http://www.w3.org/2001/XMLSchema}string" />
+     *                 &lt;attribute name="iso" use="required" type="{http://univ.fr/cvi}langues" />
+     *                 &lt;attribute name="cert" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
      *                 &lt;attribute name="nivs" type="{http://univ.fr/cvi}niveauCertif" />
      *                 &lt;attribute name="nivi" type="{http://univ.fr/cvi}valeurToeic" />
      *               &lt;/restriction>
@@ -360,7 +367,7 @@ public class Cvi {
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 &lt;sequence>
-     *                   &lt;element name="langage">
+     *                   &lt;element name="langage" maxOccurs="unbounded">
      *                     &lt;complexType>
      *                       &lt;complexContent>
      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -395,83 +402,98 @@ public class Cvi {
     public static class Competences {
 
         @XmlElement(required = true)
-        protected Cvi.Competences.Diplome diplome;
-        protected Cvi.Competences.Certif certif;
+        protected List<Cvi.Competences.Diplome> diplome;
+        protected List<Cvi.Competences.Certif> certif;
         @XmlElement(required = true)
-        protected Cvi.Competences.Lv lv;
+        protected List<Cvi.Competences.Lv> lv;
         @XmlElement(required = true)
         protected Cvi.Competences.Info info;
 
         /**
-         * Obtient la valeur de la propriété diplome.
+         * Gets the value of the diplome property.
          * 
-         * @return
-         *     possible object is
-         *     {@link Cvi.Competences.Diplome }
-         *     
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the diplome property.
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getDiplome().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Cvi.Competences.Diplome }
+         * 
+         * 
          */
-        public Cvi.Competences.Diplome getDiplome() {
-            return diplome;
+        public List<Cvi.Competences.Diplome> getDiplome() {
+            if (diplome == null) {
+                diplome = new ArrayList<Cvi.Competences.Diplome>();
+            }
+            return this.diplome;
         }
 
         /**
-         * Définit la valeur de la propriété diplome.
+         * Gets the value of the certif property.
          * 
-         * @param value
-         *     allowed object is
-         *     {@link Cvi.Competences.Diplome }
-         *     
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the certif property.
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getCertif().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Cvi.Competences.Certif }
+         * 
+         * 
          */
-        public void setDiplome(Cvi.Competences.Diplome value) {
-            this.diplome = value;
+        public List<Cvi.Competences.Certif> getCertif() {
+            if (certif == null) {
+                certif = new ArrayList<Cvi.Competences.Certif>();
+            }
+            return this.certif;
         }
 
         /**
-         * Obtient la valeur de la propriété certif.
+         * Gets the value of the lv property.
          * 
-         * @return
-         *     possible object is
-         *     {@link Cvi.Competences.Certif }
-         *     
-         */
-        public Cvi.Competences.Certif getCertif() {
-            return certif;
-        }
-
-        /**
-         * Définit la valeur de la propriété certif.
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the lv property.
          * 
-         * @param value
-         *     allowed object is
-         *     {@link Cvi.Competences.Certif }
-         *     
-         */
-        public void setCertif(Cvi.Competences.Certif value) {
-            this.certif = value;
-        }
-
-        /**
-         * Obtient la valeur de la propriété lv.
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getLv().add(newItem);
+         * </pre>
          * 
-         * @return
-         *     possible object is
-         *     {@link Cvi.Competences.Lv }
-         *     
-         */
-        public Cvi.Competences.Lv getLv() {
-            return lv;
-        }
-
-        /**
-         * Définit la valeur de la propriété lv.
          * 
-         * @param value
-         *     allowed object is
-         *     {@link Cvi.Competences.Lv }
-         *     
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Cvi.Competences.Lv }
+         * 
+         * 
          */
-        public void setLv(Cvi.Competences.Lv value) {
-            this.lv = value;
+        public List<Cvi.Competences.Lv> getLv() {
+            if (lv == null) {
+                lv = new ArrayList<Cvi.Competences.Lv>();
+            }
+            return this.lv;
         }
 
         /**
@@ -606,11 +628,6 @@ public class Cvi {
                 this.descript = value;
             }
 
-            @Override
-            public String toString() {
-                return datedeb + " -> " + datefin + " : " + descript;
-            }
-
         }
 
 
@@ -628,7 +645,7 @@ public class Cvi {
          *         &lt;element name="descript" type="{http://www.w3.org/2001/XMLSchema}string"/>
          *         &lt;element name="institut" type="{http://www.w3.org/2001/XMLSchema}string"/>
          *       &lt;/sequence>
-         *       &lt;attribute name="niveau" type="{http://univ.fr/cvi}niveauDiplome" />
+         *       &lt;attribute name="niveau" use="required" type="{http://univ.fr/cvi}niveauDiplome" />
          *     &lt;/restriction>
          *   &lt;/complexContent>
          * &lt;/complexType>
@@ -650,7 +667,7 @@ public class Cvi {
             protected String descript;
             @XmlElement(required = true)
             protected String institut;
-            @XmlAttribute(name = "niveau")
+            @XmlAttribute(name = "niveau", required = true)
             protected NiveauDiplome niveau;
 
             /**
@@ -749,10 +766,6 @@ public class Cvi {
                 this.niveau = value;
             }
 
-            @Override
-            public String toString() {
-                return date +" - "+ descript +" ("+institut+") ["+ niveau+"]";
-            }
         }
 
 
@@ -766,7 +779,7 @@ public class Cvi {
          *   &lt;complexContent>
          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       &lt;sequence>
-         *         &lt;element name="langage">
+         *         &lt;element name="langage" maxOccurs="unbounded">
          *           &lt;complexType>
          *             &lt;complexContent>
          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -793,30 +806,35 @@ public class Cvi {
         public static class Info {
 
             @XmlElement(required = true)
-            protected Cvi.Competences.Info.Langage langage;
+            protected List<Cvi.Competences.Info.Langage> langage;
 
             /**
-             * Obtient la valeur de la propriété langage.
+             * Gets the value of the langage property.
              * 
-             * @return
-             *     possible object is
-             *     {@link Cvi.Competences.Info.Langage }
-             *     
-             */
-            public Cvi.Competences.Info.Langage getLangage() {
-                return langage;
-            }
-
-            /**
-             * Définit la valeur de la propriété langage.
+             * <p>
+             * This accessor method returns a reference to the live list,
+             * not a snapshot. Therefore any modification you make to the
+             * returned list will be present inside the JAXB object.
+             * This is why there is not a <CODE>set</CODE> method for the langage property.
              * 
-             * @param value
-             *     allowed object is
-             *     {@link Cvi.Competences.Info.Langage }
-             *     
+             * <p>
+             * For example, to add a new item, do as follows:
+             * <pre>
+             *    getLangage().add(newItem);
+             * </pre>
+             * 
+             * 
+             * <p>
+             * Objects of the following type(s) are allowed in the list
+             * {@link Cvi.Competences.Info.Langage }
+             * 
+             * 
              */
-            public void setLangage(Cvi.Competences.Info.Langage value) {
-                this.langage = value;
+            public List<Cvi.Competences.Info.Langage> getLangage() {
+                if (langage == null) {
+                    langage = new ArrayList<Cvi.Competences.Info.Langage>();
+                }
+                return this.langage;
             }
 
 
@@ -905,8 +923,8 @@ public class Cvi {
          * &lt;complexType>
          *   &lt;complexContent>
          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *       &lt;attribute name="iso" type="{http://univ.fr/cvi}langues" />
-         *       &lt;attribute name="cert" type="{http://www.w3.org/2001/XMLSchema}string" />
+         *       &lt;attribute name="iso" use="required" type="{http://univ.fr/cvi}langues" />
+         *       &lt;attribute name="cert" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
          *       &lt;attribute name="nivs" type="{http://univ.fr/cvi}niveauCertif" />
          *       &lt;attribute name="nivi" type="{http://univ.fr/cvi}valeurToeic" />
          *     &lt;/restriction>
@@ -920,9 +938,9 @@ public class Cvi {
         @XmlType(name = "")
         public static class Lv {
 
-            @XmlAttribute(name = "iso")
+            @XmlAttribute(name = "iso", required = true)
             protected Langues iso;
-            @XmlAttribute(name = "cert")
+            @XmlAttribute(name = "cert", required = true)
             protected String cert;
             @XmlAttribute(name = "nivs")
             protected NiveauCertif nivs;
@@ -1025,11 +1043,6 @@ public class Cvi {
                 this.nivi = value;
             }
 
-            @Override
-            public String toString() {
-                if(nivs == null) return iso +" - "+ cert +"["+nivi+"]";
-                else return iso +" - "+ cert +"["+nivs+"]";
-            }
         }
 
     }
@@ -1266,7 +1279,7 @@ public class Cvi {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="expe">
+     *         &lt;element name="expe" maxOccurs="unbounded" minOccurs="0">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
@@ -1293,31 +1306,35 @@ public class Cvi {
     })
     public static class Prof {
 
-        @XmlElement(required = true)
-        protected Cvi.Prof.Expe expe;
+        protected List<Cvi.Prof.Expe> expe;
 
         /**
-         * Obtient la valeur de la propriété expe.
+         * Gets the value of the expe property.
          * 
-         * @return
-         *     possible object is
-         *     {@link Cvi.Prof.Expe }
-         *     
-         */
-        public Cvi.Prof.Expe getExpe() {
-            return expe;
-        }
-
-        /**
-         * Définit la valeur de la propriété expe.
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the expe property.
          * 
-         * @param value
-         *     allowed object is
-         *     {@link Cvi.Prof.Expe }
-         *     
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getExpe().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Cvi.Prof.Expe }
+         * 
+         * 
          */
-        public void setExpe(Cvi.Prof.Expe value) {
-            this.expe = value;
+        public List<Cvi.Prof.Expe> getExpe() {
+            if (expe == null) {
+                expe = new ArrayList<Cvi.Prof.Expe>();
+            }
+            return this.expe;
         }
 
 
@@ -1428,10 +1445,6 @@ public class Cvi {
                 this.descript = value;
             }
 
-            @Override
-            public String toString() {
-                return datedeb + " -> " + datefin + " : " + descript;
-            }
         }
 
     }

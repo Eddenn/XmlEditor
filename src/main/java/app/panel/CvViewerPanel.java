@@ -36,7 +36,7 @@ public class CvViewerPanel extends JPanel {
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(null,"Connection au service impossible","Erreur lors de la connection au service",JOptionPane.ERROR_MESSAGE);
                 }
-                view.setText(cv);
+                view.setText("<html>"+cv+"</html>");
             }
         });
 

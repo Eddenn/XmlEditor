@@ -1,29 +1,37 @@
 package app.panel;
 
-import app.model.Cvi;
-import app.model.Langues;
-import app.model.NiveauCertif;
-import app.model.NiveauDiplome;
+import app.model.*;
+import app.util.CvUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.transform.Result;
+import javax.xml.ws.http.HTTPException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringWriter;
 
 public class CvFormPanel extends JPanel{
 
     private static final FlowLayout leftFlowLayout = new FlowLayout(FlowLayout.LEFT);
+
+    private JTextField id;
     private JTextField prenom;
     private JTextField nom;
     private JRadioButton rbStage;
     private JRadioButton rbEmploi;
     private JTextField objectif;
-    private ActionType actionType;
+
+    private final ActionType actionType;
     private JButton actionButton;
 
     private DefaultListModel<Cvi.Prof.Expe> expeListModel;
@@ -44,7 +52,7 @@ public class CvFormPanel extends JPanel{
     private DefaultListModel<Cvi.Divers> diversListModel;
     private JList<Cvi.Divers> diversList;
 
-    public CvFormPanel(ActionType actionType) {
+    public CvFormPanel(final ActionType actionType) {
         if(actionType != ActionType.ADD && actionType != ActionType.MODIFY) throw new IllegalArgumentException("CvFormPanel ne peux avoir que ADD ou MODIFY en action.");
         this.actionType = actionType;
 
@@ -53,12 +61,50 @@ public class CvFormPanel extends JPanel{
         setLayout(new BorderLayout());
         add(jScrollPane,BorderLayout.CENTER);
         actionButton = new JButton("Envoyer");
+        actionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(actionType == ActionType.ADD) {
+                    Cvi cvi = getCvi();
+                    try {
+                        StringWriter xml = CvUtils.marshal(cvi);
+                        try {
+                            CvUtils.doAction(ActionType.ADD,xml);
+                        } catch (HTTPException e1) {
+                            JOptionPane.showMessageDialog(null,"Code de retour : "+e1.getStatusCode(),"Erreur lors de la requête",JOptionPane.ERROR_MESSAGE);
+                        } catch (IOException e1) {
+                            JOptionPane.showMessageDialog(null,"Impossible de lire la réponse","Erreur lors de l'envoi du formulaire",JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (JAXBException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    Cvi cvi = getCvi();
+                    try {
+                        StringWriter xml = CvUtils.marshal(cvi);
+                        try {
+                            CvUtils.doAction(ActionType.MODIFY,id.getText(),xml);
+                        } catch (HTTPException e1) {
+                            JOptionPane.showMessageDialog(null,"Code de retour : "+e1.getStatusCode(),"Erreur lors de la requête",JOptionPane.ERROR_MESSAGE);
+                        } catch (IOException e1) {
+                            JOptionPane.showMessageDialog(null,"Impossible de lire la réponse","Erreur lors de l'envoi du formulaire",JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (JAXBException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
         add(actionButton,BorderLayout.SOUTH);
     }
 
     private JPanel initializeForm() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
+
+        if(actionType == ActionType.MODIFY) {
+            mainPanel.add(createIdPanel());
+        }
 
         //Identitée
         mainPanel.add(createIdentitePanel());
@@ -89,6 +135,20 @@ public class CvFormPanel extends JPanel{
     }
 
     //---Panel principaux---
+    private JPanel createIdPanel() {
+        JPanel panel = createBasePanel("Id");
+        {
+            id = new JTextField(50);
+            JPanel p = new JPanel(leftFlowLayout);
+            {
+                p.add(new JLabel("Id :"));
+                p.add(id);
+            }
+            panel.add(p);
+
+        }
+        return panel;
+    }
 
     private JPanel createIdentitePanel() {
         JPanel panel = createBasePanel("Identitée");
@@ -148,6 +208,14 @@ public class CvFormPanel extends JPanel{
             //--Debut liste des experiences
             expeListModel = new DefaultListModel<Cvi.Prof.Expe>();
             expeList = new JList<Cvi.Prof.Expe>(expeListModel);
+            expeList.setCellRenderer(new DefaultListCellRenderer() {
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    Component c =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    setText( CvFormPanel.toString((Cvi.Prof.Expe) value) );
+                    return c;
+                }
+            });
 
             p.add(expeList,BorderLayout.CENTER);
             JPanel q = new JPanel(new BorderLayout()); {
@@ -211,6 +279,14 @@ public class CvFormPanel extends JPanel{
             //--Debut liste des experiences
             diversListModel = new DefaultListModel<Cvi.Divers>();
             diversList = new JList<Cvi.Divers>(diversListModel);
+            diversList.setCellRenderer(new DefaultListCellRenderer() {
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    Component c =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    setText( CvFormPanel.toString((Cvi.Divers) value) );
+                    return c;
+                }
+            });
 
             p.add(diversList,BorderLayout.CENTER);
             JPanel q = new JPanel(new BorderLayout()); {
@@ -218,16 +294,20 @@ public class CvFormPanel extends JPanel{
                 addExpeButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Cvi.Divers tmp = new Cvi.Divers();
-                        try {
-                            String desc = JOptionPane.showInputDialog(null, "Entrer une description(*) :", "Entrée d'information complémentaire", JOptionPane.PLAIN_MESSAGE);
-                            if (desc == null) throw new NullPointerException();
-                            tmp.setDescript(desc);
-                        } catch (NullPointerException e1) {
-                            JOptionPane.showMessageDialog(null, "Vous devez saisir tous les champs obligatoire", "Impossible d'ajouter une information complémentaire", JOptionPane.ERROR_MESSAGE);
-                            return;
+                        if(diversListModel.size() < 5) {
+                            Cvi.Divers tmp = new Cvi.Divers();
+                            try {
+                                String desc = JOptionPane.showInputDialog(null, "Entrer une description(*) :", "Entrée d'information complémentaire", JOptionPane.PLAIN_MESSAGE);
+                                if (desc == null) throw new NullPointerException();
+                                tmp.setDescript(desc);
+                            } catch (NullPointerException e1) {
+                                JOptionPane.showMessageDialog(null, "Vous devez saisir tous les champs obligatoire", "Impossible d'ajouter une information complémentaire", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            diversListModel.addElement(tmp);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas ajouter plus de 5 informations complémentaires.", "Impossible d'ajouter une information complémentaire supplémentaire", JOptionPane.ERROR_MESSAGE);
                         }
-                        diversListModel.addElement(tmp);
                     }
                 });
                 q.add(addExpeButton,BorderLayout.EAST);
@@ -258,6 +338,14 @@ public class CvFormPanel extends JPanel{
                 //--Debut liste des diplomes
                 diplomeListModel = new DefaultListModel<Cvi.Competences.Diplome>();
                 diplomeList = new JList<Cvi.Competences.Diplome>(diplomeListModel);
+                diplomeList.setCellRenderer(new DefaultListCellRenderer() {
+                    @Override
+                    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                        Component c =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                        setText( CvFormPanel.toString((Cvi.Competences.Diplome) value) );
+                        return c;
+                    }
+                });
 
                 p.add(diplomeList, BorderLayout.CENTER);
                 JPanel q = new JPanel(new BorderLayout());
@@ -321,6 +409,14 @@ public class CvFormPanel extends JPanel{
                 //--Debut liste des diplomes
                 certifListModel = new DefaultListModel<Cvi.Competences.Certif>();
                 certifList = new JList<Cvi.Competences.Certif>(certifListModel);
+                certifList.setCellRenderer(new DefaultListCellRenderer() {
+                    @Override
+                    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                        Component c =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                        setText( CvFormPanel.toString((Cvi.Competences.Certif) value) );
+                        return c;
+                    }
+                });
 
                 p.add(certifList, BorderLayout.CENTER);
                 JPanel q = new JPanel(new BorderLayout());
@@ -376,6 +472,14 @@ public class CvFormPanel extends JPanel{
                 //--Debut liste des diplomes
                 lvListModel = new DefaultListModel<Cvi.Competences.Lv>();
                 lvList = new JList<Cvi.Competences.Lv>(lvListModel);
+                lvList.setCellRenderer(new DefaultListCellRenderer() {
+                    @Override
+                    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                        Component c =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                        setText( CvFormPanel.toString((Cvi.Competences.Lv)value) );
+                        return c;
+                    }
+                });
 
                 p.add(lvList, BorderLayout.CENTER);
                 JPanel q = new JPanel(new BorderLayout());
@@ -451,6 +555,14 @@ public class CvFormPanel extends JPanel{
             //--Debut liste des experiences
             infoListModel = new DefaultListModel<Cvi.Competences.Info.Langage>();
             infoList = new JList<Cvi.Competences.Info.Langage>(infoListModel);
+            infoList.setCellRenderer(new DefaultListCellRenderer() {
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    Component c =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    setText( CvFormPanel.toString((Cvi.Competences.Info.Langage)value) );
+                    return c;
+                }
+            });
 
             p.add(infoList,BorderLayout.CENTER);
             JPanel q = new JPanel(new BorderLayout()); {
@@ -499,4 +611,80 @@ public class CvFormPanel extends JPanel{
         return panel;
     }
 
+    public static String toString(Cvi.Competences.Lv lv) {
+        if(lv.getNivs() == null) return lv.getIso() +" - "+ lv.getCert() +"["+lv.getNivi()+"]";
+        else return lv.getIso() +" - "+ lv.getCert() +"["+lv.getNivs()+"]";
+    }
+
+    public static String toString(Cvi.Prof.Expe expe) {
+        return expe.getDatedeb() + " -> " + expe.getDatefin() + " : " + expe.getDescript();
+    }
+
+    public static String toString(Cvi.Competences.Diplome diplome) {
+        return diplome.getDate() +" - "+ diplome.getDescript() +" ("+diplome.getInstitut()+") ["+ diplome.getNiveau()+"]";
+    }
+
+    public static String toString(Cvi.Competences.Certif certif) {
+        return certif.getDatedeb() + " -> " + certif.getDatefin() + " : " + certif.getDescript();
+    }
+
+    public static String toString(Cvi.Competences.Info.Langage langage) {
+        return langage.getNom() + " ("+langage.getNiveau()+")";
+    }
+
+    public static String toString(Cvi.Divers divers) {
+        return divers.getDescript();
+    }
+
+    public Cvi getCvi() {
+        Cvi cvi = new Cvi();
+
+        //Identitee
+        Cvi.Identite identite = new Cvi.Identite();
+        identite.setNom(nom.getText());
+        identite.setPrenom(prenom.getText());
+        cvi.setIdentite(identite);
+
+        //Objectif
+        Cvi.Objectif obj1 = new Cvi.Objectif();
+        if(rbEmploi.isSelected()) {
+            obj1.setEmploi(objectif.getText());
+        } else {
+            obj1.setStage(objectif.getText());
+        }
+        cvi.setObjectif(obj1);
+
+        //Experiences professionnelles
+        Cvi.Prof prof = new Cvi.Prof();
+        for (Object e: expeListModel.toArray()) {
+            prof.getExpe().add((Cvi.Prof.Expe)e);
+        }
+        cvi.setProf(prof);
+
+        //Competences
+        Cvi.Competences competences = new Cvi.Competences();
+        for (Object d: diplomeListModel.toArray()) {
+            competences.getDiplome().add((Cvi.Competences.Diplome)d);
+        }
+        for (Object c: certifListModel.toArray()) {
+            competences.getCertif().add((Cvi.Competences.Certif)c);
+        }
+        for (Object l: lvListModel.toArray()) {
+            competences.getLv().add((Cvi.Competences.Lv)l);
+        }
+        Cvi.Competences.Info info = new Cvi.Competences.Info();
+        for (Object l: infoListModel.toArray()) {
+            info.getLangage().add((Cvi.Competences.Info.Langage)l);
+        }
+        competences.setInfo(info);
+        cvi.setCompetences(competences);
+
+
+        //Divers
+        for (Object d: diversListModel.toArray()) {
+            cvi.getDivers().add((Cvi.Divers)d);
+        }
+
+        return cvi;
+    }
 }

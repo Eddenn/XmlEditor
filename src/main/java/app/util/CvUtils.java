@@ -1,7 +1,13 @@
 package app.util;
 
+import app.model.Cvi;
 import app.panel.ActionType;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
 import javax.xml.ws.http.HTTPException;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -40,6 +46,22 @@ public class CvUtils {
         while ( (c = xml.read()) != -1 ) {
             strXml += (char)c;
         }
+
+        System.out.println("["+type.getMethod().name()+"]"+url);
+        return sendRequest(url,type.getMethod().name(),"application/xml",strXml);
+    }
+
+    public static String doAction(ActionType type, StringWriter xml) throws IOException, HTTPException {
+        String url = SERVICE_PATH+type.getPath();
+        String strXml = xml.toString();
+
+        System.out.println("["+type.getMethod().name()+"]"+url);
+        return sendRequest(url,type.getMethod().name(),"application/xml",strXml);
+    }
+
+    public static String doAction(ActionType type, String id, StringWriter xml) throws IOException, HTTPException {
+        String url = SERVICE_PATH+type.getPath()+"/"+id;
+        String strXml = xml.toString();
 
         System.out.println("["+type.getMethod().name()+"]"+url);
         return sendRequest(url,type.getMethod().name(),"application/xml",strXml);
@@ -121,6 +143,21 @@ public class CvUtils {
         } finally {
             con.disconnect();
         }
+    }
+
+    public static StringWriter marshal(Cvi cv) throws JAXBException {
+        StringWriter stringWriter = new StringWriter();
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(Cvi.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+
+        QName qName = new QName("", "cvi");
+        JAXBElement<Cvi> root = new JAXBElement<Cvi>(qName, Cvi.class, cv);
+
+        jaxbMarshaller.marshal(root, stringWriter);
+
+        return stringWriter;
     }
 
 }
