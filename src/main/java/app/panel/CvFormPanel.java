@@ -2,6 +2,7 @@ package app.panel;
 
 import app.model.*;
 import app.util.CvUtils;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.ws.http.HTTPException;
 import java.awt.*;
@@ -69,7 +71,19 @@ public class CvFormPanel extends JPanel{
                     try {
                         StringWriter xml = CvUtils.marshal(cvi);
                         try {
-                            CvUtils.doAction(ActionType.ADD,xml);
+                            String response = CvUtils.doAction(ActionType.ADD,xml);
+                            try {
+                                response = CvUtils.format(response,true);
+                            } catch (SAXException | ParserConfigurationException e1) {
+                                System.err.println("Fail lors du parsing de la réponse XML.");
+                            }
+                            JEditorPane view = new JEditorPane();
+                            view.setEditable(false);
+                            view.setContentType("application/xml");
+                            view.setText(response);
+                            JScrollPane jsp = new JScrollPane(view);
+                            jsp.setPreferredSize(new Dimension(600,300));
+                            JOptionPane.showMessageDialog(null,jsp,"Réponse de la requête",JOptionPane.INFORMATION_MESSAGE);
                         } catch (HTTPException e1) {
                             JOptionPane.showMessageDialog(null,"Code de retour : "+e1.getStatusCode(),"Erreur lors de la requête",JOptionPane.ERROR_MESSAGE);
                         } catch (IOException e1) {
@@ -83,7 +97,19 @@ public class CvFormPanel extends JPanel{
                     try {
                         StringWriter xml = CvUtils.marshal(cvi);
                         try {
-                            CvUtils.doAction(ActionType.MODIFY,id.getText(),xml);
+                            String response = CvUtils.doAction(ActionType.MODIFY,id.getText(),xml);
+                            try {
+                                response = CvUtils.format(response,true);
+                            } catch (SAXException | ParserConfigurationException e1) {
+                                System.err.println("Fail lors du parsing de la réponse XML.");
+                            }
+                            JEditorPane view = new JEditorPane();
+                            view.setEditable(false);
+                            view.setContentType("application/xml");
+                            view.setText(response);
+                            JScrollPane jsp = new JScrollPane(view);
+                            jsp.setPreferredSize(new Dimension(600,300));
+                            JOptionPane.showMessageDialog(null,jsp,"Réponse de la requête",JOptionPane.INFORMATION_MESSAGE);
                         } catch (HTTPException e1) {
                             JOptionPane.showMessageDialog(null,"Code de retour : "+e1.getStatusCode(),"Erreur lors de la requête",JOptionPane.ERROR_MESSAGE);
                         } catch (IOException e1) {
@@ -151,7 +177,7 @@ public class CvFormPanel extends JPanel{
     }
 
     private JPanel createIdentitePanel() {
-        JPanel panel = createBasePanel("Identitée");
+        JPanel panel = createBasePanel("Identitée (*)");
         {
             prenom = new JTextField(50);
             JPanel p = new JPanel(leftFlowLayout);
@@ -174,7 +200,7 @@ public class CvFormPanel extends JPanel{
     }
 
     private JPanel createObjectifPanel() {
-        JPanel panel = createBasePanel("Objectif");
+        JPanel panel = createBasePanel("Objectif (*)");
         {
             ButtonGroup objectifChoice = new ButtonGroup();
             rbStage = new JRadioButton("Stage",true);
@@ -331,7 +357,7 @@ public class CvFormPanel extends JPanel{
     //---Panels inclu dans les principaux---
 
     private JPanel createDiplomePanel() {
-        JPanel diplomePanel = createBasePanel("Diplomes");
+        JPanel diplomePanel = createBasePanel("Diplomes (*)");
         {
             JPanel p = new JPanel(new BorderLayout());
             {
@@ -464,7 +490,7 @@ public class CvFormPanel extends JPanel{
     }
 
     private JPanel createLangLevelPanel() {
-        JPanel panel = createBasePanel("Langues vivantes");
+        JPanel panel = createBasePanel("Langues vivantes (*)");
 
         {
             JPanel p = new JPanel(new BorderLayout());
@@ -548,7 +574,7 @@ public class CvFormPanel extends JPanel{
     }
 
     private JPanel createInfo() {
-        JPanel panel = createBasePanel("Liste des languages de programmation");
+        JPanel panel = createBasePanel("Liste des languages de programmation (*)");
 
         JPanel p = new JPanel(new BorderLayout());
         {

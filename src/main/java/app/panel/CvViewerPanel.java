@@ -1,8 +1,12 @@
 package app.panel;
 
 import app.util.CvUtils;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.ws.http.HTTPException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,8 +26,7 @@ public class CvViewerPanel extends JPanel {
 
         view = new JEditorPane();
         view.setEditable(false);
-        if(type == ActionType.RESUME) view.setContentType("application/xml");
-        else view.setContentType("text/html");
+        view.setContentType("application/xml");
         textField = new JTextField();
         button = new JButton("Envoyer");
         button.addActionListener(new ActionListener() {
@@ -37,8 +40,13 @@ public class CvViewerPanel extends JPanel {
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(null,"Connection au service impossible","Erreur lors de la connection au service",JOptionPane.ERROR_MESSAGE);
                 }
-                view.getEditorKit().createDefaultDocument();
-                view.setText("<html>"+cv+"</html>");
+
+                try {
+                    cv = CvUtils.format(cv, true);
+                    view.setText(cv);
+                } catch (IOException | SAXException | ParserConfigurationException e1) {
+                    view.setText(cv);
+                }
             }
         });
 

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b0a39e2-a7d2-4a97-88c4-4200e29e1eb4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/CvEditor.java" afterPath="$PROJECT_DIR$/src/main/java/app/CvEditor.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java" afterPath="$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java" afterPath="$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java" afterPath="$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/util/CvUtils.java" afterPath="$PROJECT_DIR$/src/main/java/app/util/CvUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -16,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CvEditor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CvEditor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/CvEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1134">
-              <caret line="77" column="32" lean-forward="false" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
+            <state relative-caret-position="432">
+              <caret line="133" column="48" lean-forward="true" selection-start-line="133" selection-start-column="48" selection-end-line="133" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -28,14 +31,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CvViewerPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CvBasicViewerPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="543">
+              <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CvViewerPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="23" column="32" lean-forward="true" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+            <state relative-caret-position="144">
+              <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
               <folding>
-                <element signature="e#822#1610#0" expanded="true" />
-                <element signature="e#1609#1610#0" expanded="true" />
+                <element signature="e#918#1849#0" expanded="true" />
+                <element signature="e#1848#1849#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,11 +57,14 @@
       <file leaf-file-name="CvFormPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2250">
-              <caret line="143" column="42" lean-forward="false" selection-start-line="143" selection-start-column="42" selection-end-line="143" selection-end-column="42" />
+            <state relative-caret-position="313">
+              <caret line="104" column="29" lean-forward="true" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
                 <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+                <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+                <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
                 <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
                 <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
                 <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
@@ -71,8 +87,8 @@
       <file leaf-file-name="CvUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/util/CvUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1962">
-              <caret line="123" column="27" lean-forward="false" selection-start-line="123" selection-start-column="27" selection-end-line="123" selection-end-column="27" />
+            <state relative-caret-position="435">
+              <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,19 +136,19 @@
         <option value="$PROJECT_DIR$/src/main/java/app/panel/CvPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/panel/BasicViewType.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/panel/HTTPMethod.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/panel/ActionType.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/panel/CvTableModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/panel/CvListModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/CvEditor.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/model/Langues.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/model/NiveauCertif.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/model/NiveauDiplome.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/model/ObjectFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/model/Cvi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/util/CvUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/CvEditor.java" />
       </list>
     </option>
   </component>
@@ -209,7 +225,7 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -281,7 +297,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -446,11 +462,12 @@
       <workItem from="1523965041123" duration="181000" />
       <workItem from="1523981823364" duration="23000" />
       <workItem from="1523983663577" duration="447000" />
+      <workItem from="1524149221150" duration="4191000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32234000" />
+    <option name="totallyTimeSpent" value="36425000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -465,7 +482,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.50208336" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22587487" sideWeight="0.49791667" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22587487" sideWeight="0.49791667" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -501,6 +518,45 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2250">
+          <caret line="143" column="42" lean-forward="false" selection-start-line="143" selection-start-column="42" selection-end-line="143" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createDiversPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createDiplomePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createCertifPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createLangLevelPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createInfo#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#toString#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#toString#1;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#toString#2;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#toString#3;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#toString#4;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#getCvi#0;class#CvFormPanel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="23" column="32" lean-forward="true" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding>
+            <element signature="e#918#1849#0" expanded="true" />
+            <element signature="e#1848#1849#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/CvEditor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1134">
@@ -526,8 +582,8 @@
         <state relative-caret-position="558">
           <caret line="38" column="49" lean-forward="false" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
           <folding>
-            <element signature="e#822#1610#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#918#1849#0" expanded="true" />
+            <element signature="e#1848#1849#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -538,7 +594,10 @@
           <caret line="143" column="42" lean-forward="false" selection-start-line="143" selection-start-column="42" selection-end-line="143" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
@@ -573,7 +632,10 @@
           <caret line="143" column="42" lean-forward="false" selection-start-line="143" selection-start-column="42" selection-end-line="143" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
@@ -607,8 +669,8 @@
         <state relative-caret-position="558">
           <caret line="38" column="49" lean-forward="false" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
           <folding>
-            <element signature="e#822#1610#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#918#1849#0" expanded="true" />
+            <element signature="e#1848#1849#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -628,8 +690,8 @@
         <state relative-caret-position="324">
           <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
           <folding>
-            <element signature="e#822#1610#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#918#1849#0" expanded="true" />
+            <element signature="e#1848#1849#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -650,7 +712,10 @@
           <caret line="143" column="42" lean-forward="true" selection-start-line="143" selection-start-column="42" selection-end-line="143" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
@@ -692,8 +757,8 @@
         <state relative-caret-position="450">
           <caret line="32" column="51" lean-forward="true" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
           <folding>
-            <element signature="e#822#1610#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#918#1849#0" expanded="true" />
+            <element signature="e#1848#1849#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -724,7 +789,10 @@
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
@@ -869,14 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/model/Cvi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6494">
-          <caret line="1017" column="32" lean-forward="false" selection-start-line="1017" selection-start-column="32" selection-end-line="1017" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/awt/List.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -907,41 +967,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/CvEditor.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/javax/swing/text/StyledEditorKit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="77" column="32" lean-forward="false" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="252">
+          <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/javax/swing/text/html/HTMLEditorKit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+        <state relative-caret-position="235">
+          <caret line="162" column="39" lean-forward="false" selection-start-line="162" selection-start-column="39" selection-end-line="162" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-89">
+          <caret line="2209" column="59" lean-forward="true" selection-start-line="2209" selection-start-column="59" selection-end-line="2209" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/model/Cvi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16902">
+          <caret line="1017" column="32" lean-forward="false" selection-start-line="1017" selection-start-column="32" selection-end-line="1017" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/util/CvUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1962">
-          <caret line="123" column="27" lean-forward="false" selection-start-line="123" selection-start-column="27" selection-end-line="123" selection-end-column="27" />
+        <state relative-caret-position="435">
+          <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+          <folding>
+            <element signature="e#918#1849#0" expanded="true" />
+            <element signature="e#1848#1849#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvBasicViewerPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvFormPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2250">
-          <caret line="143" column="42" lean-forward="false" selection-start-line="143" selection-start-column="42" selection-end-line="143" selection-end-column="42" />
+        <state relative-caret-position="313">
+          <caret line="104" column="29" lean-forward="true" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initializeForm#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createBasePanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdPanel#0;class#CvFormPanel#0" expanded="false" />
+            <element signature="method#createIdentitePanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createObjectifPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createProfPanel#0;class#CvFormPanel#0" expanded="false" />
             <element signature="method#createCompetencesPanel#0;class#CvFormPanel#0" expanded="false" />
@@ -960,13 +1056,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/panel/CvViewerPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/CvEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="23" column="32" lean-forward="true" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+        <state relative-caret-position="432">
+          <caret line="133" column="48" lean-forward="true" selection-start-line="133" selection-start-column="48" selection-end-line="133" selection-end-column="48" />
           <folding>
-            <element signature="e#822#1610#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

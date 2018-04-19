@@ -2,12 +2,15 @@ package app;
 
 import app.panel.*;
 import app.util.CvUtils;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.ws.http.HTTPException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -121,7 +124,19 @@ public class CvEditor {
                     FileReader file = null;
                     try {
                         file = new FileReader(chooser.getSelectedFile().getAbsolutePath());
-                        CvUtils.doAction(ActionType.ADD,file);
+                        String response = CvUtils.doAction(ActionType.ADD,file);
+                        try {
+                            response = CvUtils.format(response,true);
+                        } catch (SAXException | ParserConfigurationException e1) {
+                            System.err.println("Fail lors du parsing de la réponse XML.");
+                        }
+                        JEditorPane view = new JEditorPane();
+                        view.setEditable(false);
+                        view.setContentType("application/xml");
+                        view.setText(response);
+                        JScrollPane jsp = new JScrollPane(view);
+                        jsp.setPreferredSize(new Dimension(600,300));
+                        JOptionPane.showMessageDialog(null,jsp,"Réponse de la requête",JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException e1) {
                         JOptionPane.showMessageDialog(mainFrame,"Le fichier fourni n'a pas pu être lu.","Erreur lors de la lecture du fichier",JOptionPane.ERROR_MESSAGE);
                     } catch (HTTPException e1) {

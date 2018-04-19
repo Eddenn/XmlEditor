@@ -2,12 +2,20 @@ package app.util;
 
 import app.model.Cvi;
 import app.panel.ActionType;
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.ws.http.HTTPException;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -16,7 +24,7 @@ import java.net.URL;
 
 public class CvUtils {
 
-    private static String SERVICE_PATH = "http://localhost:8080/restcvi";
+    private static String SERVICE_PATH = "https://cvi-manager.herokuapp.com/";
 
     public static String getServicePath() {
         return SERVICE_PATH;
@@ -152,12 +160,28 @@ public class CvUtils {
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
 
-        QName qName = new QName("", "cvi");
+        QName qName = new QName("http://univ.fr/cvi", "cvi");
         JAXBElement<Cvi> root = new JAXBElement<Cvi>(qName, Cvi.class, cv);
 
         jaxbMarshaller.marshal(root, stringWriter);
 
         return stringWriter;
+    }
+
+    public static String format(String xml, Boolean ommitXmlDeclaration) throws IOException, SAXException, ParserConfigurationException {
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = db.parse(new InputSource(new StringReader(xml)));
+
+        OutputFormat format = new OutputFormat(doc);
+        format.setIndenting(true);
+        format.setIndent(2);
+        format.setOmitXMLDeclaration(ommitXmlDeclaration);
+        format.setLineWidth(Integer.MAX_VALUE);
+        Writer outxml = new StringWriter();
+        XMLSerializer serializer = new XMLSerializer(outxml, format);
+        serializer.serialize(doc);
+
+        return outxml.toString();
     }
 
 }
