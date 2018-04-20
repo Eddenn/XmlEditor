@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://univ.fr/cvi")
-package fr.univ.cvi;
+package app.model;

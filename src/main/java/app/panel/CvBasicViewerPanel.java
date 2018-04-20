@@ -41,6 +41,7 @@ public class CvBasicViewerPanel extends JPanel{
     }
 
     public void load() {
+        view.setText("");
         String content = "";
         try {
             content = CvUtils.doAction(type);
